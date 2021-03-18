@@ -1,15 +1,16 @@
 const db = require("../models");
 const Post = db.Post;
-const Op = db.Sequelize.Op;
+//const Op = db.Sequelize.Op;
 
 // Create and Save a new Post
 exports.create = (req, res, next) => {
   // Validate request
-  if (!req.body.title) {
+  console.log(req);
+  if (!req.params.body) {
     res.status(400).send({
       message: "Le contenu ne peu pas être vide!",
     });
-    console.log(req.params);
+
     return;
   }
 
