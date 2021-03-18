@@ -1,21 +1,20 @@
 <script>
-import HomeLink from './components/HomeLink.vue'
+//import HomeLink from './components/HomeLink.vue';
+import Login from './components/Login.vue'
 
 export default {
         name: 'App',
         components: {
-                HomeLink
+                
+                Login,
         }
 }
 </script>
 
 <template>
         <div id="app">
-                <nav>
-                        <HomeLink />
-                        <a href="/about">À propos</a>
-                        <a href="/contact">Contact</a>
-                </nav>
-                <p>Bienvenue sur notre page d'<HomeLink /></p>
+                <img src="./assets/icon-left-font-monochrome-black.png" alt="goupomania_logo" height="500px">
+                <Login></Login>
+              
         </div>
 </template>
