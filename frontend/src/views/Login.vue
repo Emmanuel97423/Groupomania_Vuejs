@@ -2,7 +2,8 @@
   <div id="Login">
       <nav id="nav">
              <router-link to="/feed">Feed</router-link> |
-            <router-link to="/about">A propos</router-link>
+            <router-link to="/about">A propos</router-link> |
+            <router-link to="/signup">Créer un compte</router-link>
       </nav> 
       <img src="@/assets/icon-left-font-monochrome-black.png" alt="Groupomania_logo" height="150px">
     
@@ -16,11 +17,12 @@
 </template>
 
 <script>
-import LoginHome from '../components/LoginHome.vue';
+import LoginHome from '../components/LoginComponent.vue';
+
 export default {
     name: 'Login',
     components: {
-        LoginHome
+        LoginHome,      
     },
      data () {
         return {
