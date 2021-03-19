@@ -2,12 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const Sequelize = require("sequelize");
 const db = require("./models");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const postRoute = require("./routes/post.route");
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 //Requête CORS
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -18,12 +21,7 @@ app.use((req, res, next) => {
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
   next();
-});
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+});*/
 
 db.sequelize
   .sync()
