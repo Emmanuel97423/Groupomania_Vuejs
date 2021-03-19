@@ -15,21 +15,26 @@
         class="$v.email"
         type="email"
         v-model="$v.user.email.$model"
-        placeholder="Votre Email"
+        placeholder="exemple@groupomania.com"
       />
       <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
         <span v-if="!$v.user.email.required">Email requis</span>
         <span v-if="!$v.user.email.email">Email invalide</span>
       </div>
     </div>
-    <div id="signup--password">
+    <div id="div--signup__password" :class="{ 'Il y a une erreur': $v.user.password.$error }">
+      
       <label for="password"></label>
       <input
-        id="password"
+        class="$v.password"
         type="password"
-        name="password"
+        v-model="$v.user.password.$model"
         placeholder="Password"
       />
+        <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
+        <span v-if="!$v.user.password.required">Mot de passe requis</span>
+        <span v-if="!$v.user.password.minLength">Le mot de passe dit contenir au moin 8 caractères</span>
+      </div>
     </div>
     <div id="options">
       <div id="login">
@@ -45,12 +50,8 @@
 import ButtonSignup from "./buttons/ButtonSignup.vue";
 import required from "vuelidate/lib/validators/required";
 import email from "vuelidate/lib/validators/email";
-//Verification du nom de domaine
-const url = "groupomania.com";
-const matchUrl = (value) => {
-  value.substring(value.indexOf("@") + 1) ===
-    url.substring(url.indexOf(".") + 1);
-};
+import minLength from "vuelidate/lib/validators/minLength";
+
 
 export default {
   name: "SignupComponent",
@@ -62,6 +63,7 @@ export default {
       url: "groupomania.com",
       user: {
         email: "",
+        password:"",
       },
       submitted: false,
     };
@@ -69,13 +71,30 @@ export default {
 
   validations: {
     user: {
-      email: { required, email, matchUrl },
+      email: { required, email },
+      password: {
+        required,
+
+         minLength: minLength(8),
+          
+        containsUppercase: (value) => {
+          return !/[A-Z]/.test(value)
+        },
+        containsLowercase: (value) => {
+          return !/[a-z]/.test(value)
+        },
+        containsNumber: (value) => {
+          return !/[0-9]/.test(value)
+        },
+        containsSpecial: (value) => {
+          return !/[#?!@$%^&*-]/.test(value)
+        }
+  }
     },
   },
   methods: {
     checkSignupForm() {
       this.submitted = true;
-
       // stop here if form is invalid
       this.$v.$touch();
       if (this.$v.$invalid) {
@@ -84,6 +103,7 @@ export default {
 
       alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
     },
+
   },
 };
 </script>
