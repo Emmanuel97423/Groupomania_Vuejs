@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "body-parser": "^1.19.0"
+  },
+  "devDependencies": {
+    "vue-cli-plugin-vuetify": "~2.3.1"
   }
 }
