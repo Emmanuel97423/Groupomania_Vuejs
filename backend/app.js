@@ -6,11 +6,8 @@ const db = require("./models");
 const postRoute = require("./routes/post.route");
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 //Requête CORS
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -21,7 +18,14 @@ app.use(express.json());
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
   next();
-});*/
+});
+
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.json());
 
 db.sequelize
   .sync()

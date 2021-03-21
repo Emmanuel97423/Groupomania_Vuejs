@@ -1,14 +1,13 @@
 POST http://localhost:3000/api/post/
 
-Content-Type: "application/json"
+Content-Type: application/json
 
 {
-    "x":"Lorem"
+    "title":"Lorem"
 }
 
 ################################
 POST https://jsonplaceholder.typicode.com/posts
-
 Content-Type: "application/json"
 
 {
