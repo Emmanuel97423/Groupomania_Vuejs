@@ -22,8 +22,10 @@
         <span v-if="!$v.user.email.email">Email invalide</span>
       </div>
     </div>
-    <div id="div--signup__password" :class="{ 'Il y a une erreur': $v.user.password.$error }">
-      
+    <div
+      id="div--signup__password"
+      :class="{ 'Il y a une erreur': $v.user.password.$error }"
+    >
       <label for="password"></label>
       <input
         class="$v.password"
@@ -31,9 +33,11 @@
         v-model="$v.user.password.$model"
         placeholder="Password"
       />
-        <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
+      <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
         <span v-if="!$v.user.password.required">Mot de passe requis</span>
-        <span v-if="!$v.user.password.minLength">Le mot de passe dit contenir au moin 8 caractères</span>
+        <span v-if="!$v.user.password.minLength"
+          >Le mot de passe dit contenir au moin 8 caractères</span
+        >
       </div>
     </div>
     <div id="options">
@@ -52,7 +56,6 @@ import required from "vuelidate/lib/validators/required";
 import email from "vuelidate/lib/validators/email";
 import minLength from "vuelidate/lib/validators/minLength";
 
-
 export default {
   name: "SignupComponent",
   components: {
@@ -63,7 +66,7 @@ export default {
       url: "groupomania.com",
       user: {
         email: "",
-        password:"",
+        password: "",
       },
       submitted: false,
     };
@@ -75,21 +78,21 @@ export default {
       password: {
         required,
 
-         minLength: minLength(8),
-          
+        minLength: minLength(8),
+
         containsUppercase: (value) => {
-          return !/[A-Z]/.test(value)
+          return !/[A-Z]/.test(value);
         },
         containsLowercase: (value) => {
-          return !/[a-z]/.test(value)
+          return !/[a-z]/.test(value);
         },
         containsNumber: (value) => {
-          return !/[0-9]/.test(value)
+          return !/[0-9]/.test(value);
         },
         containsSpecial: (value) => {
-          return !/[#?!@$%^&*-]/.test(value)
-        }
-  }
+          return !/[#?!@$%^&*-]/.test(value);
+        },
+      },
     },
   },
   methods: {
@@ -103,7 +106,6 @@ export default {
 
       alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
     },
-
   },
 };
 </script>
