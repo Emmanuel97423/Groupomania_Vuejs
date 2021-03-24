@@ -1,9 +1,8 @@
 const express = require("express");
-const cors = require("cors");
-const Sequelize = require("sequelize");
 const db = require("./models");
 //const bodyParser = require("body-parser");
-const postRoute = require("./routes/post.route");
+//const postRoute = require("./routes/post.route");
+const signupRoute = require("./routes/signup.route.js");
 const app = express();
 
 //Requête CORS
@@ -29,13 +28,14 @@ app.use(express.json());
 
 db.sequelize
   .sync()
-  .then(() => {
+  .then((req) => {
     console.log("Connection à la base de données msql réussi.");
   })
   .catch((err) => {
     console.error("Impossible de se connecté à la base de donnée:", err);
   });
 
-app.use("/api/post", postRoute);
+//app.use("/api/post", postRoute);
+app.use("/api/signup", signupRoute);
 
 module.exports = app;
