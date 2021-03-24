@@ -2,7 +2,7 @@ const express = require("express");
 const db = require("./models");
 //const bodyParser = require("body-parser");
 //const postRoute = require("./routes/post.route");
-const signupRoute = require("./routes/signup.route.js");
+const userRoute = require("./routes/user.route.js");
 const app = express();
 
 //Requête CORS
@@ -36,6 +36,6 @@ db.sequelize
   });
 
 //app.use("/api/post", postRoute);
-app.use("/api/signup", signupRoute);
+app.use("/api/user", userRoute);
 
 module.exports = app;

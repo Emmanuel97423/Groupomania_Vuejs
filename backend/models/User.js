@@ -4,9 +4,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -21,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     isSuperAdmin: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
   });
