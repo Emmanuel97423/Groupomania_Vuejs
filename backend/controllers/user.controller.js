@@ -5,38 +5,45 @@ const jwt = require("jsonwebtoken");
 
 //Création ustilisateur dans la base de donnée mysql
 exports.signup = (req, res, next) => {
-  // Validate request
-  User.findOne({
-    where: { email: req.body.email },
-  }).then((email) => {
-    if (email) {
-      return res
-        .status(401)
-        .json({ message: "Cette adresse email est déjà inscrit" });
-    } else {
-      bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-          const superAdmin = () => {
-            if (req.body.email == "admin@groupomnia.com") {
-              return true;
-            }
-          };
-          const user = {
-            firstName: req.body.firstName,
-            userId: req.params.id,
-            email: req.body.email,
-            password: hash,
-            avatarUrl: req.body.avatarUrl,
-            isSuperAdmin: superAdmin(),
-          };
-          User.create(user)
-            .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-            .catch((error) => res.status(400).json({ error }));
-        })
-        .catch((error) => res.status(500).json({ error }));
-    }
-  });
+  if (!req.body.email) {
+    res.status(400).send({ message: "Le contenu ne peu pas être vide" });
+    return;
+  } else {
+    // Validate request
+    User.findOne({
+      where: { email: req.body.email },
+    }).then((email) => {
+      if (email) {
+        return res
+          .status(401)
+          .json({ message: "Cette adresse email est déjà inscrit" });
+      } else {
+        bcrypt
+          .hash(req.body.password, 10)
+          .then((hash) => {
+            const superAdmin = () => {
+              if (req.body.email == "admin@groupomnia.com") {
+                return true;
+              }
+            };
+            const user = {
+              firstName: req.body.firstName,
+              userId: req.params.id,
+              email: req.body.email,
+              password: hash,
+              avatarUrl: req.body.avatarUrl,
+              isSuperAdmin: superAdmin(),
+            };
+            User.create(user)
+              .then(() =>
+                res.status(201).json({ message: "Utilisateur créé !" })
+              )
+              .catch((error) => res.status(400).json({ error }));
+          })
+          .catch((error) => res.status(500).json({ error }));
+      }
+    });
+  }
 };
 exports.login = (req, res, next) => {
   console.log(req.body.email);

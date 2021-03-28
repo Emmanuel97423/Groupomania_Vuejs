@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("./models");
 //const bodyParser = require("body-parser");
-//const postRoute = require("./routes/post.route");
+const postRoute = require("./routes/post.route");
 const userRoute = require("./routes/user.route.js");
 const app = express();
 
@@ -35,7 +35,7 @@ db.sequelize
     console.error("Impossible de se connecté à la base de donnée:", err);
   });
 
-//app.use("/api/post", postRoute);
+app.use("/api/post", postRoute);
 app.use("/api/user", userRoute);
 
 module.exports = app;

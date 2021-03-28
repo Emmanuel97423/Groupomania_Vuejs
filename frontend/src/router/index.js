@@ -1,26 +1,32 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Feed from "../views/Feed.vue";
-import Login from "../views/Login.vue";
-import Signup from "../views/Signup.vue";
+import Home from "../views/Home.vue";
+import Post from "../views/PostView.vue";
+import Signup from "../views/SignupView.vue";
+import Login from "../views/LoginView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/signup",
+    path: "/",
     name: "Signup",
     component: Signup,
   },
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
   },
   {
-    path: "/feed",
-    name: "Feed",
-    component: Feed,
+    path: "/home",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "/post/:id",
+    name: "Post",
+    component: Post,
   },
   {
     path: "/about",
@@ -35,6 +41,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
+  base: process.env.BASE_URL,
   routes,
 });
 
