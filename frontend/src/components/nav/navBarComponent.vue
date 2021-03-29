@@ -33,9 +33,7 @@
       </v-btn>
 
 
-      <v-btn text >
-        <router-link to ="/about" class='btn-top-menu'>About</router-link>
-      </v-btn>  
+ 
        <!--<v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"

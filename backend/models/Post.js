@@ -42,11 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     like: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      defaultValue: 0,
     },
-    userdislike: {
+    dislike: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      defaultValue: 0,
     },
     userLiked: {
       type: DataTypes.STRING,

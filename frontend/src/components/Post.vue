@@ -31,9 +31,9 @@
       >
       </v-row>
 
-      <div class="my-4 subtitle-1">
+     <!-- <div class="my-4 subtitle-1">
         <em>Posté par •</em> {{ userFirstName }}
-      </div>
+      </div>-->
 
       <div>{{ post.content }}</div>
     </v-card-text>
@@ -46,14 +46,7 @@
     <v-card-actions class="d-flex justify-space-between">
  
      
-            <v-btn
-        color="teal lighten-2"
-        text
-        
-      >
-        Modifier
 
-      </v-btn>
             <v-btn
             v-if="adminPost"
         color="teal lighten-2"
@@ -64,23 +57,8 @@
       </v-btn>
      
     <div>
-      <v-btn
-        class="ma-2"
-        text
-        icon
-        color="blue lighten-2"
-      >
-        <v-icon>mdi-thumb-up</v-icon>
-      </v-btn>
-
-      <v-btn
-        class="ma-2"
-        text
-        icon
-        color="red lighten-2"
-      >
-        <v-icon>mdi-thumb-down</v-icon>
-      </v-btn>
+      
+      <thumb v-bind:post="post"></thumb>
     </div>
     </v-card-actions>
     </v-card>
@@ -93,10 +71,14 @@
 <script>
 import { mapGetters } from "vuex";
 import axios from 'axios'
+import thumb from '@/components/ButtonComponents/ThumbComponent'
 
 
 export default {
     name: 'PostComponent',
+    components: {
+      thumb,
+    },
     data: () => ({
           post: {},
           loading: false,
@@ -140,6 +122,7 @@ export default {
           .then((response) => 
           console.log("Objet supprimé: " + response.data)
           ).then(() =>  {
+             alert("Votre article à été supprimé")
             this.$router.push({ path: '/home' })
           })
         .catch((error) => console.log(error));

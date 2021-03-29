@@ -22,7 +22,7 @@
       v-model="name"
       :error-messages="nameErrors"
       :counter="10"
-      label="Name"
+      label="Nom"
       required
       @input="$v.name.$touch()"
       @blur="$v.name.$touch()"
@@ -52,7 +52,7 @@
       class="mr-4"
       @click="submit"
     >
-      submit
+      Créer un compte
     </v-btn>
     <v-btn @click="clear">
       clear
@@ -76,6 +76,8 @@
   import UserDataService from "@/services/UserDataService"
 
   export default {
+
+
     mixins: [validationMixin],
 
     validations: {
@@ -95,6 +97,11 @@
           required: value => !!value || 'Email requis.',
           min: v => v.length >= 8 || 'Min 8 characters',
         },
+        alert:{
+           snackbar: false,
+            text: 'Votre compte à bien été créer',
+            timeout: 2000,
+        }
     }),
 
     methods: {
@@ -112,9 +119,14 @@
               UserDataService.signup(data).then(response =>{
           this.id = response.data.id;
           console.log(response.data);
-          this.$router.push({path:"/login"})
-        }).catch(error => {
+          this.alert.snackbar = true;
+        }).then(() => {
+          alert("Compte créer")
+          setTimeout(this.$router.push({path:"/login"}), 3900 )
+        })
+        .catch(error => {
           console.log(error)
+          alert("Votre compte n'a pas pu être créer.")
         })
         }
       },

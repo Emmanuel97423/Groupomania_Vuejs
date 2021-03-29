@@ -18,18 +18,9 @@
         tile
       >
               <form>
+
     <v-text-field
-      v-model="user.firstName"
-      :error-messages="nameErrors"
-      :counter="10"
-      label="Nom"
-      required
-      @input="$v.firstName.$touch()"
-      @blur="$v.firstName.$touch()"
-      
-    ></v-text-field>
-    <v-text-field
-      v-model="user.email"
+      v-model="email"
       :error-messages="emailErrors"
       label="E-mail"
       required
@@ -38,7 +29,7 @@
     ></v-text-field>
 
         <v-text-field
-            v-model="user.password"
+            v-model="password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
@@ -73,7 +64,7 @@
 
 <script>
   import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email } from 'vuelidate/lib/validators'
+  import { required, email } from 'vuelidate/lib/validators'
   import UserDataService from "@/services/UserDataService"
 
   export default {
@@ -81,7 +72,7 @@
     mixins: [validationMixin],
 
     validations: {
-      firstName: { required, maxLength: maxLength(10) },
+      
       email: { required, email },
       password: { required,},
       
@@ -93,13 +84,12 @@
     },
 
     data: () => ({
-       user: {
+       
         id:null,
-        firstName: '',
         email: '',
         password:'',
         isSuperAdmin: false,
-      },
+      
 
       show1: false,
 
@@ -131,17 +121,17 @@
 
     methods: {
       submit (e) {
+        
         e.preventDefault()
         this.$v.$touch()
         let data = {
-          firstName: this.user.firstName,
-          email: this.user.email,
-          password: this.user.password,
+          
+          email: this.email,
+          password: this.password,
         };
         UserDataService.login(data).then(response =>{
           const token = response.data.token
-          this.user.id = response.data.id;
-          
+          this.id = response.data.id; 
           localStorage.setItem('userId', response.data.userId)
           localStorage.setItem('token', response.data.token)
 
@@ -150,7 +140,8 @@
         }).then(() =>{
           const tokenLocalStorage = localStorage.getItem('token');
             if(!tokenLocalStorage == this.token) {
-          console.log("Vous n'avez pas accès")
+              
+          console.log("Vous n'avez pas accès");
           this.$router.push('/')
         } else {
           this.$router.push('Home')
@@ -158,6 +149,7 @@
         })
         
         .catch(error => {
+          alert("Vérifiez vos identifiants")
           console.log(error)
         });
         
@@ -166,7 +158,7 @@
       },
       clear () {
         this.$v.$reset()
-        this.user.firstName = ''
+        
         this.user.email = ''
         this.user.password = ''
         this.select = null

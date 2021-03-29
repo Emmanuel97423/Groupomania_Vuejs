@@ -117,6 +117,7 @@ import axios from 'axios';
       userDisconnect() {
         localStorage.clear();
         this.$router.push('Login')
+         alert("Vous êtes déconnecté")
       },
       userDelete() {
         const id = localStorage.getItem('userId')
@@ -125,6 +126,7 @@ import axios from 'axios';
           .then((response) => 
           console.log("Objet supprimé: " + response.data)
           ).then(() =>  {
+             alert("Votre compté a bien été supprimé")
             this.$router.push({ path: '/login' })
           })
         .catch((error) => console.log(error));

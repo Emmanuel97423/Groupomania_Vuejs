@@ -34,10 +34,10 @@
       </v-btn>
 
 
-      <v-btn text >
+      <!--<v-btn text >
         <router-link to ="/about" class='btn-top-menu'>About</router-link>
       </v-btn>  
-       <!--<v-btn
+       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
         text
@@ -161,11 +161,13 @@ export default {
           description:this.post.description,
           content:this.post.content,
           userId: userIdLocalStorage,
+          like:0,
           
       };
       PostDataService.sendingPost(data).then(response => {
         this.id = response.data.id;
       }).then(() => {
+        alert("Votre article a été crée")
         this.$router.push({ path: '/home' })
       })
       .catch(error => {console.log(error)})

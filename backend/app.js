@@ -3,6 +3,7 @@ const db = require("./models");
 //const bodyParser = require("body-parser");
 const postRoute = require("./routes/post.route");
 const userRoute = require("./routes/user.route.js");
+const likeRoute = require("./routes/like.route");
 const app = express();
 
 //Requête CORS
@@ -27,7 +28,7 @@ app.use(
 app.use(express.json());
 
 db.sequelize
-  .sync()
+  .sync({ force: false })
   .then((req) => {
     console.log("Connection à la base de données msql réussi.");
   })
@@ -37,5 +38,7 @@ db.sequelize
 
 app.use("/api/post", postRoute);
 app.use("/api/user", userRoute);
+//Routes de likes
+app.use("/api/like", likeRoute);
 
 module.exports = app;
