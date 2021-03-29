@@ -17,9 +17,9 @@
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title class="title">
-              John Leider
+              {{ user.firstName }}
             </v-list-item-title>
-            <v-list-item-subtitle>john@grouponmania.com</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
@@ -48,7 +48,32 @@
               <v-list-item-title v-text="item.text"></v-list-item-title>
               <v-list-item-title class="text--secondary" v-text="item.avis" ></v-list-item-title>
             </v-list-item-content>
+            
           </v-list-item>
+          <v-list-item->
+                <v-list-item-icon>
+              <v-icon v-icon-text='mdi-account-arrow-right'></v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+                <v-btn
+                depressed
+                color="primary"
+                @click="userDisconnect"
+              >
+                Se déconnecter
+              </v-btn>
+              <v-btn
+                depressed
+                color="error"
+                @click="userDelete"
+              >
+                Supprimer profil
+              </v-btn>
+              
+            </v-list-item-content>
+          </v-list-item->
+      
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -56,10 +81,12 @@
 </template>
 
 <script>
+import axios from 'axios';
   export default {
     name: 'FeedLeftMenu',
     data: () => ({
       selectedItem: 0,
+      user:{},
       items: [
         { text: 'Covid-19 - Informations', icon: 'mdi-needle' },
         { text: 'Evènements', icon: 'mdi-calendar-check' },
@@ -67,9 +94,45 @@
         { text: 'Compte', icon: 'mdi-account' },
         { text: 'Affichage et accéssibilité', icon: 'mdi-moon-waning-crescent' },
         { text: 'Donner votre avis', icon: 'mdi-message-draw',  avis:  'Aidez à améliorer le service' },
-        { text: 'Se déconnecter', icon: 'mdi-account-arrow-right' },
+        
       ],
     }),
+
+    methods: {
+      getUserInfos() {
+        
+        const id = localStorage.getItem('userId')
+              axios
+          .get("http://localhost:3000/api/user/" + id)
+          .then((response) => 
+          
+          this.user = response.data
+          ).then(()=>{
+            console.log(this.user);
+            
+            
+          })
+        .catch((error) => console.log(error));
+      },
+      userDisconnect() {
+        localStorage.clear();
+        this.$router.push('Login')
+      },
+      userDelete() {
+        const id = localStorage.getItem('userId')
+         axios
+          .delete("http://localhost:3000/api/user/" + id)
+          .then((response) => 
+          console.log("Objet supprimé: " + response.data)
+          ).then(() =>  {
+            this.$router.push({ path: '/login' })
+          })
+        .catch((error) => console.log(error));
+      }
+    },
+    beforeMount() {
+      this.getUserInfos()
+    }
   }
 </script>
 

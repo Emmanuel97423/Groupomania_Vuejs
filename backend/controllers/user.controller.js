@@ -72,20 +72,15 @@ exports.login = (req, res, next) => {
 exports.delete = (req, res, next) => {
   const id = req.params.id;
   User.destroy({ where: { id: id } })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "Utilisateur supprimé avec sucée!",
-        });
-      } else {
-        res.send({
-          message: `Impossible de supprmer id=${id}. Utilisateur inexistant!`,
-        });
-      }
+    .then(() => res.status(200).json({ message: "Utilisateur supprimé !" }))
+    .catch((error) => res.status(400).json({ error }));
+};
+exports.getOneUser = (req, res, next) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then((user) => {
+      res.status(200).json(user);
     })
     .catch((err) => {
-      res.status(500).send({
-        message: "Impossible de supprimer l'utilisateur id=" + id,
-      });
+      res.status(500).send({ message: "Une erreur est survenue" });
     });
 };
