@@ -13,8 +13,7 @@
         style="height: 150px;"
       >
         <v-col
-          v-for="n in 1"
-          :key="n"
+         
           class="col-2"
         >
           <v-card
@@ -26,8 +25,7 @@
           </v-card>
         </v-col>
              <v-col
-          v-for="n in 1"
-          :key="n"
+        
           class="col-8"
         >
           <v-card
@@ -40,8 +38,7 @@
           </v-card>
         </v-col>
              <v-col
-          v-for="n in 1"
-          :key="n"
+        
           id="col-3"
         >
           <v-card
@@ -49,7 +46,7 @@
             outlined
             tile
           >
-            <FeedRightChat></FeedRightChat>
+           <!-- <FeedRightChat></FeedRightChat> -->
           </v-card>
         </v-col>
       </v-row>
@@ -64,13 +61,13 @@
 <script>
 import FeedCard from "../components/feedComponents/FeedCard.vue"
 import FeedLeftMenu from "../components/feedComponents/FeedLeftMenu.vue"
-import FeedRightChat from "../components/feedComponents/FeedRightChat.vue"
+//import FeedRightChat from "../components/feedComponents/FeedRightChat.vue"
 export default {
     name:'Feed',
     components: {
         FeedCard,
         FeedLeftMenu,
-        FeedRightChat,
+        //FeedRightChat,
     },
     data() {
       

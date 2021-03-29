@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const LikeDb = sequelize.define(
-    "LikeDb",
+  const DislikeDb = sequelize.define(
+    "DislikeDb",
     {
       userId: {
         type: DataTypes.INTEGER,
@@ -26,5 +26,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  return LikeDb;
+  return DislikeDb;
 };

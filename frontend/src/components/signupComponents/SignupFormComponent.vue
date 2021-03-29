@@ -1,7 +1,7 @@
 <template>
 <div class="container">
         <img src="@/assets/icon-left-font-monochrome-black.png" alt="Groupomania_logo" height="60px">
-        
+        <v-text class="font-weight-black">Créer un compte</v-text>
         <v-card
       class="d-flex justify-center mb-6"
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
@@ -126,7 +126,7 @@
         })
         .catch(error => {
           console.log(error)
-          alert("Votre compte n'a pas pu être créer.")
+          alert("Création de compte avec ces identifiants impossible.")
         })
         }
       },

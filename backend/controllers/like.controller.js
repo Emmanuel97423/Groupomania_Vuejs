@@ -1,89 +1,50 @@
 const db = require("../models");
-const Post = db.Post;
 const LikeDb = db.LikeDb;
+const DislikeDb = db.DislikeDb;
 
 exports.like = (req, res, next) => {
   //Lorsque qu'un utilisateur like
-  if (req.body.like == 1) {
-    //console.log(req.params.id);
-    //const userId = LikeDb.findOne({ where: { userId: req.body.userId } });
-    LikeDb.findOne({ where: { userId: req.body.userId } }).then(() => {
-      Post.findOne({ where: { id: req.params.id } })
-        //Incrémentation du compteur de likes
-        .then(() => {
-          Post.increment("like", { by: 1, where: { id: req.params.id } })
-            .then(() => {
-              console.log("like: +1");
-            })
-            .catch((err) => console.log(err));
-        })
-        //Ajout à la table likeDb
-        .then(() => {
-          const userIdTable = {
-            userId: req.body.userId,
-          };
-          LikeDb.create(userIdTable)
-            .then(() => {
-              console.log("likeDb + " + userIdTable);
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-
+  if (req.body.like === 1) {
+    const userIdLikeTable = {
+      userId: req.body.userId,
+      postId: req.params.id,
+    };
+    LikeDb.create(userIdLikeTable)
+      .then(() => {
+        console.log("likeDb + " + userIdLikeTable);
+      })
+      .catch((err) => console.log(err));
+    return res.status(200).json({ message: "Post liké" });
     //Lorsque qu'un utilisateur ne like ni ne dislike
-  } else if (req.body.like == 0) {
-    Post.update(
-      { where: { id: req.params.id } },
-      { $pull: { usersLiked: req.body.userId } },
-      { new: true }
-    )
-      .then(() => {
-        console.log(usersLiked);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    Sauce.update(
-      { where: { id: req.params.id } },
-      { $inc: { likes: -1 } },
-      { new: true }
-    )
-      .then(() => {
-        console.log(likes);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  } else if (req.body.like === 0) {
     console.log("Aucun avis");
     return res.status(200).json({ message: "Aucun avis" });
     //Lorsque qu'un utilisateur dislike
-  } else if (req.body.like == -1) {
-    Post.update(
-      { where: { id: req.params.id } },
-      { $push: { usersDisliked: req.body.userId } },
-      { new: true }
-    )
+  } else if (req.body.like === -1) {
+    const userIddisLikeTable = {
+      userId: req.body.userId,
+      postId: req.params.id,
+    };
+    DislikeDb.create(userIddisLikeTable)
       .then(() => {
-        console.log(usersDisliked);
+        console.log("likeDb + " + userIddisLikeTable);
       })
-      .catch((err) => {
-        console.log(err);
-      });
-    Post.update(
-      { where: { id: req.params.id } },
-      { $inc: { dislikes: +1 } },
-      { new: true }
-    )
-      .then(() => {
-        console.log(dislikes);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
     console.log("je n'aime pas");
     return res.status(200).json({ message: "Post disliké" });
   }
 };
+
+exports.getLikeCount = (req, res, next) => {
+  LikeDb.findAndCountAll({
+    where: { postId: req.params.id },
+    limit: 99,
+    offset: 12,
+  })
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => console.log(err));
+};
+
+//exports.getdislikeCount = (req, res, next) => {};

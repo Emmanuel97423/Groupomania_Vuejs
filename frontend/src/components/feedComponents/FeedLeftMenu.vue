@@ -19,7 +19,7 @@
             <v-list-item-title class="title">
               {{ user.firstName }}
             </v-list-item-title>
-            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+            <v-list-item-subtitle></v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
@@ -51,9 +51,9 @@
             
           </v-list-item>
           <v-list-item->
-                <v-list-item-icon>
+               <!-- <v-list-item-icon>
               <v-icon v-icon-text='mdi-account-arrow-right'></v-icon>
-            </v-list-item-icon>
+            </v-list-item-icon> -->
 
             <v-list-item-content>
                 <v-btn

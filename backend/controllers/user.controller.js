@@ -2,6 +2,7 @@ const db = require("../models");
 const User = db.User;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const datamask = require("datamask");
 
 //Création ustilisateur dans la base de donnée mysql
 exports.signup = (req, res, next) => {
@@ -29,7 +30,7 @@ exports.signup = (req, res, next) => {
             const user = {
               firstName: req.body.firstName,
               userId: req.params.id,
-              email: req.body.email,
+              email: datamask.email(req.body.email, "#", 45, 80),
               password: hash,
               avatarUrl: req.body.avatarUrl,
               isSuperAdmin: superAdmin(),
@@ -47,7 +48,9 @@ exports.signup = (req, res, next) => {
 };
 exports.login = (req, res, next) => {
   console.log(req.body.email);
-  User.findOne({ where: { email: req.body.email } })
+  User.findOne({
+    where: { email: datamask.email(req.body.email, "#", 45, 80) },
+  })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });

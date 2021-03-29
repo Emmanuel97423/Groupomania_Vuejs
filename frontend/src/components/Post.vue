@@ -7,7 +7,7 @@
     width="100%"
     
   >
-  <h2>{{ post.title }}</h2>
+  <h2>{{ postObject.title }}</h2>
     <template slot="progress">
       <v-progress-linear
         color="deep-purple"
@@ -17,8 +17,9 @@
     </template>
 
     <v-img
-      height="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+       height="140"
+      width="750"
+      src="@/assets/icon-left-font-monochrome-black.png"
     ></v-img>
 
 
@@ -35,7 +36,7 @@
         <em>Posté par •</em> {{ userFirstName }}
       </div>-->
 
-      <div>{{ post.content }}</div>
+      <div>{{ postObject.content }}</div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
@@ -80,7 +81,7 @@ export default {
       thumb,
     },
     data: () => ({
-          post: {},
+          postObject: {},
           loading: false,
           selection: 1,
           display: false,
@@ -96,12 +97,12 @@ export default {
           axios
           .get("http://localhost:3000/api/post/" + id)
           .then((response) => 
-          this.post = response.data
+          this.postObject = response.data
           ).then(()=>{
             const localStorageUserId = localStorage.getItem('userId');
-            console.log("userId: " + this.post.userId);
+            console.log("userId: " + this.postObject.userId);
              console.log("LocalStorageuserId: " + localStorageUserId)
-                if(this.post.userId ==  localStorageUserId) {
+                if(this.postObject.userId ==  localStorageUserId) {
               this.adminPost = true;
             } else { this.adminPost = false;}
             

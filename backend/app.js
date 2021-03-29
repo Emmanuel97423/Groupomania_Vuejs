@@ -1,9 +1,12 @@
 const express = require("express");
 const db = require("./models");
 //const bodyParser = require("body-parser");
+const path = require("path");
+const helmet = require("helmet");
 const postRoute = require("./routes/post.route");
 const userRoute = require("./routes/user.route.js");
 const likeRoute = require("./routes/like.route");
+const dislikeRoute = require("./routes/dislike.route");
 const app = express();
 
 //Requête CORS
@@ -19,6 +22,10 @@ app.use((req, res, next) => {
   );
   next();
 });
+//En tête http sécurité
+app.use(helmet());
+//désactivation de l'en-tête X-Powered-By
+app.disable("x-powered-by");
 
 app.use(
   express.urlencoded({
@@ -40,5 +47,6 @@ app.use("/api/post", postRoute);
 app.use("/api/user", userRoute);
 //Routes de likes
 app.use("/api/like", likeRoute);
+//app.use("/api/dislike", dislikeRoute);
 
 module.exports = app;

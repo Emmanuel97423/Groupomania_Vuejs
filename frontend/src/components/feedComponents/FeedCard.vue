@@ -18,8 +18,9 @@
     </template>
 
     <v-img
-      height="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      height="140"
+      width="750"
+      src="@/assets/icon-left-font-monochrome-black.png"
     ></v-img>
 
 

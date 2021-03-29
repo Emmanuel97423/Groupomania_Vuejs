@@ -55,8 +55,7 @@
         style="height: 150px;"
       >
         <v-col
-          v-for="n in 1"
-          :key="n"
+        
           class="col-2"
         >
           <v-card
@@ -68,8 +67,7 @@
           </v-card>
         </v-col>
              <v-col
-          v-for="n in 1"
-          :key="n"
+         
           class="col-8"
         >
           <v-card
@@ -82,8 +80,7 @@
           </v-card>
         </v-col>
              <v-col
-          v-for="n in 1"
-          :key="n"
+        
           id="col-3"
         >
           <v-card
