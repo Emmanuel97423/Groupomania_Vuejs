@@ -114,6 +114,7 @@ import { mapGetters } from "vuex";
       selection: 1,
       display: false,
       overlay: false,
+      zIndex:0,
     }),
     methods: {
       onePost () {

@@ -16,7 +16,7 @@ exports.signup = (req, res, next) => {
     }).then((email) => {
       if (email) {
         User.findOne({
-          where: { delete: true },
+          where: { delete: false },
         }).then(() => {
           return res
             .status(401)

@@ -1,7 +1,7 @@
 <template>
 <div class="container">
         <img src="@/assets/icon-left-font-monochrome-black.png" alt="Groupomania_logo" height="60px">
-        <v-text class="font-weight-black">Créer un compte</v-text>
+        <h3 class="font-weight-black">Créer un compte</h3>
         <v-card
       class="d-flex justify-center mb-6"
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
@@ -122,7 +122,7 @@
           this.alert.snackbar = true;
         }).then(() => {
           alert("Compte créer")
-          setTimeout(this.$router.push({path:"/login"}), 3900 )
+          this.$router.push({path:"/login"})
         })
         .catch(error => {
           console.log(error)

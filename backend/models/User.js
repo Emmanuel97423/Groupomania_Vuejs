@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: {
+          args: [8],
+          msg: "Le mot de passe doit comprter 8 caractères",
+        },
+      },
     },
     avatarUrl: {
       type: DataTypes.STRING,

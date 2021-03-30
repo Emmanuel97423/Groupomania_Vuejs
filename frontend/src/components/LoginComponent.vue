@@ -1,7 +1,7 @@
 <template>
 <div class="container">
         <img src="@/assets/icon-left-font-monochrome-black.png" alt="Groupomania_logo" height="60px">
-        <v-text class="font-weight-black">Connexion</v-text>
+        <h3 name='connexion' class="font-weight-black">Connexion</h3>
         <v-card
       class="d-flex justify-center mb-6"
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
@@ -20,6 +20,7 @@
               <form>
 
     <v-text-field
+    name="email"
       v-model="email"
       :error-messages="emailErrors"
       label="E-mail"

@@ -44,8 +44,8 @@ const mutations = {
   SET_POSTS(state, posts) {
     state.posts = posts;
   },
-  SET_ONEPOST(state, post) {
-    state.post = post;
+  SET_ONEPOST(state, Onepost) {
+    state.post = Onepost;
   },
   DELETE_POST(state, post) {
     state.post = post;

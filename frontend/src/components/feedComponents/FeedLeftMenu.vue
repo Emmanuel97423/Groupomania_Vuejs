@@ -16,7 +16,7 @@
 
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title class="title">
+            <v-list-item-title name="title" class="title">
               {{ user.firstName }}
             </v-list-item-title>
             <v-list-item-subtitle></v-list-item-subtitle>
@@ -36,7 +36,7 @@
           v-model="selectedItem"
           color="primary"
         >
-          <v-list-item
+          <v-list-item name= "liste-item"
             v-for="(item, i) in items"
             :key="i"
           >

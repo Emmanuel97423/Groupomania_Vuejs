@@ -56,6 +56,14 @@
       >
         Supprimer
       </v-btn>
+             <v-btn
+            v-if="superAdminPost"
+        color="teal lighten-2"
+        text
+        @click="deletePost" 
+      >
+        Supprimer
+      </v-btn>
      
     <div>
       
@@ -87,6 +95,7 @@ export default {
           display: false,
           overlay: false,
           adminPost: false,
+          superAdminPost:false,
           }),
     methods: {
       //Get un post
@@ -128,11 +137,13 @@ export default {
           })
         .catch((error) => console.log(error));
           },
+
+
           superAdmin(){
             const localStorageUserId = localStorage.getItem('userId');
             axios.get("http://localhost:3000/api/user/" + localStorageUserId).then((response) =>
       
-      this.adminPost = response.data.isSuperAdmin
+      this.superAdminPost = response.data.isSuperAdmin
       )
        
       .catch((error) => console.log(error))
