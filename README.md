@@ -11,6 +11,13 @@ npm install
 nodemon server
 
 ```
+
+Pour ce connecter à la base de donnée insérer le fichier config.json contenu dans le zip du livrable dans:
+
+``` 
+cd backend
+cd config
+```
 Ecoute sur `http://localhost:3000/`
 # FRONTEND
 Le Frontend a été généré avec [Vue CLI](https://cli.vuejs.org/) version 4.5.11
