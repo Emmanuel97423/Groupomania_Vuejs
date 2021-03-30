@@ -127,7 +127,16 @@ export default {
             this.$router.push({ path: '/home' })
           })
         .catch((error) => console.log(error));
-          }   
+          },
+          superAdmin(){
+            const localStorageUserId = localStorage.getItem('userId');
+            axios.get("http://localhost:3000/api/user/" + localStorageUserId).then((response) =>
+      
+      this.adminPost = response.data.isSuperAdmin
+      )
+       
+      .catch((error) => console.log(error))
+          }
     },
 
     computed: {
@@ -135,6 +144,7 @@ export default {
     },
     beforeMount() {
          this.getPost()
+         this.superAdmin()
       
    
         //this.$store.dispatch('getOnePost') 

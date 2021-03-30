@@ -15,9 +15,13 @@ exports.signup = (req, res, next) => {
       where: { email: req.body.email },
     }).then((email) => {
       if (email) {
-        return res
-          .status(401)
-          .json({ message: "Cette adresse email est déjà inscrit" });
+        User.findOne({
+          where: { delete: true },
+        }).then(() => {
+          return res
+            .status(401)
+            .json({ message: "Cette adresse email est déjà inscrit" });
+        });
       } else {
         bcrypt
           .hash(req.body.password, 10)
@@ -54,6 +58,8 @@ exports.login = (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
+      } else if (user.delete) {
+        return res.status(401).json({ error: "Utilisateur non trouvé !" });
       }
       bcrypt
         .compare(req.body.password, user.password)
@@ -72,12 +78,14 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
-exports.delete = (req, res, next) => {
+
+exports.update = (req, res, next) => {
   const id = req.params.id;
-  User.destroy({ where: { id: id } })
+  User.update({ delete: true }, { where: { id: id } })
     .then(() => res.status(200).json({ message: "Utilisateur supprimé !" }))
     .catch((error) => res.status(400).json({ error }));
 };
+
 exports.getOneUser = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {

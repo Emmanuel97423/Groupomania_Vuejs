@@ -122,7 +122,7 @@ import axios from 'axios';
       userDelete() {
         const id = localStorage.getItem('userId')
          axios
-          .delete("http://localhost:3000/api/user/" + id)
+          .put("http://localhost:3000/api/user/" + id)
           .then((response) => 
           console.log("Objet supprimé: " + response.data)
           ).then(() =>  {

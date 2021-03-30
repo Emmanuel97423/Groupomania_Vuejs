@@ -88,7 +88,7 @@
             outlined
             tile
           >
-            <chat></chat>
+           <!-- <chat></chat>-->
           </v-card>
         </v-col>
       </v-row>
@@ -104,13 +104,13 @@
 
 import PostComponent from '../components/Post.vue';
 import leftMenu from '../components/feedComponents/FeedLeftMenu';
-import chat from '../components/feedComponents/FeedRightChat';
+//import chat from '../components/feedComponents/FeedRightChat';
 export default {
     name:"PostView",
     components : {
         PostComponent,
         leftMenu,
-        chat,
+        //chat,
 
     },
     data : () => ({

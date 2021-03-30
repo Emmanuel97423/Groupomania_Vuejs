@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
+    delete: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
   });
 
   return User;
