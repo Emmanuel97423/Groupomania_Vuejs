@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.User;
+const UserDelete = db.User.UserDelete;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const datamask = require("datamask");

@@ -5,6 +5,7 @@ const path = require("path");
 const helmet = require("helmet");
 const postRoute = require("./routes/post.route");
 const userRoute = require("./routes/user.route.js");
+//const userDeleteRoute = require("./routes/userDelete.route.js");
 const likeRoute = require("./routes/like.route");
 const dislikeRoute = require("./routes/dislike.route");
 const app = express();
@@ -48,5 +49,5 @@ app.use("/api/user", userRoute);
 //Routes de likes
 app.use("/api/like", likeRoute);
 app.use("/api/dislike", dislikeRoute);
-
+//app.use("api/userDelete", userDeleteRoute);
 module.exports = app;
