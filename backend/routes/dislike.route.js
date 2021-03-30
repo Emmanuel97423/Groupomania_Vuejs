@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
-const disLikeCtrl = require("../controllers/like.controller");
+const dislikeCtrl = require("../controllers/dislike.controller");
 
-//router.post("/:id", disLikeCtrl.dislike);
+router.post("/:id", dislikeCtrl.dislike);
+router.get("/:id", dislikeCtrl.getDislikeCount);
 
 module.exports = router;

@@ -35,7 +35,7 @@ app.use(
 app.use(express.json());
 
 db.sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then((req) => {
     console.log("Connection à la base de données msql réussi.");
   })
@@ -47,6 +47,6 @@ app.use("/api/post", postRoute);
 app.use("/api/user", userRoute);
 //Routes de likes
 app.use("/api/like", likeRoute);
-//app.use("/api/dislike", dislikeRoute);
+app.use("/api/dislike", dislikeRoute);
 
 module.exports = app;
